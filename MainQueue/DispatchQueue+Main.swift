@@ -11,6 +11,8 @@ import Foundation
 public typealias VoidHandler = () -> Void
 
 // MARK: - MainQueue
+/// http://blog.benjamin-encz.de/post/main-queue-vs-main-thread/
+/// https://github.com/devMEremenko/EasyCalls/blob/master/Classes/Calls/Queues/Queues.swift
 public extension DispatchQueue {
     
     private static let mainQueueKey = DispatchSpecificKey<String>()
@@ -29,8 +31,10 @@ public extension DispatchQueue {
      Being on the main thread does not guarantee to be in the main queue.
      It means, if the current queue is not main, the execution will be moved to the main queue.
      */
-    /// https://github.com/devMEremenko/EasyCalls/blob/master/Classes/Calls/Queues/Queues.swift#L18
     public static func toMain(_ handler: @escaping VoidHandler) {
+//        once { 
+//            setupMainQueue()
+//        }
         if DispatchQueue.isMainQueue {
             handler()
         } else if Thread.isMainThread {
@@ -59,3 +63,33 @@ extension DispatchQueue {
         DispatchQueue.main.asyncAfter(deadline: .now() + time, execute: handler)
     }
 }
+
+/// https://stackoverflow.com/a/39983813/5893286
+public extension DispatchQueue {
+    private static var _onceTracker = [String]()
+    
+    public class func once(file: String = #file, function: String = #function, line: Int = #line, block: VoidHandler) {
+        let token = file + ":" + function + ":" + String(line)
+        once(token: token, block: block)
+    }
+    
+    /**
+     Executes a block of code, associated with a unique token, only once.  The code is thread safe and will
+     only execute the code once even in the presence of multithreaded calls.
+     
+     - parameter token: A unique reverse DNS style name such as com.vectorform.<name> or a GUID
+     - parameter block: Block to execute once
+     */
+    public class func once(token: String, block: VoidHandler) {
+        objc_sync_enter(self)
+        defer { objc_sync_exit(self) }
+        
+        if _onceTracker.contains(token) {
+            return
+        }
+        
+        _onceTracker.append(token)
+        block()
+    }
+}
+

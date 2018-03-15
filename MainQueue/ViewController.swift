@@ -14,13 +14,17 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         DispatchQueue.toBackground {
-            DispatchQueue.delay(time: 2) {
+            DispatchQueue.toMain {
+                self.view.backgroundColor = UIColor.lightGray
+            }
+            DispatchQueue.delay(time: 1) {
                 DispatchQueue.toMain {
                     UIView.animate(withDuration: 0.3) {
                         self.view.backgroundColor = UIColor.blue
                     }
                 }
             }
+            
         }
         
     }
