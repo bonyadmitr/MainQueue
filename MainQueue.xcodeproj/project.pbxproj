@@ -37,6 +37,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CEA87340205A8A6600D5160B /* App */ = {
+			isa = PBXGroup;
+			children = (
+				CECF4666205A42620057DC8B /* AppDelegate.swift */,
+				CECF466D205A42620057DC8B /* Assets.xcassets */,
+				CECF466F205A42620057DC8B /* LaunchScreen.storyboard */,
+				CECF4672205A42620057DC8B /* Info.plist */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		CECF465A205A42610057DC8B = {
 			isa = PBXGroup;
 			children = (
@@ -56,13 +67,10 @@
 		CECF4665205A42620057DC8B /* MainQueue */ = {
 			isa = PBXGroup;
 			children = (
-				CECF4666205A42620057DC8B /* AppDelegate.swift */,
+				CEA87340205A8A6600D5160B /* App */,
+				CECF466A205A42620057DC8B /* Main.storyboard */,
 				CECF4668205A42620057DC8B /* ViewController.swift */,
 				CECF4678205A46980057DC8B /* DispatchQueue+Main.swift */,
-				CECF466A205A42620057DC8B /* Main.storyboard */,
-				CECF466D205A42620057DC8B /* Assets.xcassets */,
-				CECF466F205A42620057DC8B /* LaunchScreen.storyboard */,
-				CECF4672205A42620057DC8B /* Info.plist */,
 			);
 			path = MainQueue;
 			sourceTree = "<group>";
@@ -279,7 +287,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = MainQueue/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/MainQueue/App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.by.MainQueue;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -293,7 +302,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = MainQueue/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/MainQueue/App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.by.MainQueue;
 				PRODUCT_NAME = "$(TARGET_NAME)";
